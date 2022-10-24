@@ -3,6 +3,9 @@ The gateway to the Bureau of Structures (BOS) standardized single span concrete 
 
 Standard Bridge Design Tool DoT Portal
 
+Functionality Demo:
+https://www.youtube.com/watch?v=BOzosqFeHNQ&ab_channel=LukeBreyer
+
 Project Description:
 
 As part of the Wisconsin Department of Transportation’s (WisDOT) efforts to reduce oversight, delivery and overall costs associated with the local Bridge Program; the Bureau of Structures (BOS) is developing standardized single span concrete slab bridge designs and plans for local bridges. As a part of this initiative, WisDOT was awarded a grant through the FHWA State Transportation Innovation Council (STIC) incentive program.
