@@ -1,0 +1,73 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    background-image: url("../Content/Images/B360221_40.jpg");
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+    
+}
+
+.bridge {
+    background-image: url("Images/B360221_InspectionCoverPhoto.jpg");
+    opacity: 0.2;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+hr {
+    border: 2px solid black;
+}
+
+img {
+    padding: 2px;
+}
+
+.wrapper {
+    width: 100%;
+}
+
+.left_col {
+    float: left;
+    padding: 2px;
+    width: 50%;
+    /*
+    border: 1px solid gray;
+    */
+}
+
+.right_col {
+    float: left;
+    padding: 2px;
+    width: 50%;
+    /*
+    border: 1px solid gray;
+*/
+}
+
+div.left {
+    width: 35%;
+    float: left;
+    text-align: right;
+}
+
+div.right {
+    width: 60%;
+    margin-left: 10px;
+    float: left;
+}

@@ -1,0 +1,419 @@
+﻿
+@{
+    ViewBag.Title = "WisDOT Standard Bridge Design Tool";
+}
+<script>
+    var urlSettings = {
+        validateFiips: '@Url.Action("ValidateFiipsConstructionId", "Home")',
+        getPlan: '@Url.Action("GetStandardPlan", "Home")',
+        getReport: '@Url.Action("GetReport", "Home")',
+        getPlanZip: '@Url.Action("GetPlanZip", "Home")',
+        download: '@Url.Action("Download", "Home")',
+        downloadPlan: '@Url.Action("DownloadPlan", "Home")',
+        enableLocalLet: '@Url.Action("EnableLocalLet", "Home")'
+    };
+</script>
+<!-- action="Url.Action("GetPlan", "Home")"-->
+<div>
+    <br />
+</div>
+<div>
+    <h4><b><i>WisDOT Standard Bridge Design Tool</i></b></h4>
+    <hr />
+    <p>
+        Welcome! This page is the primary access point for the Wisconsin Department of Transportation's <b>Standard Bridge Design Tool</b>.
+        The WisDOT Bureau of Structures created this tool to simplify the design and drafting of single-span concrete slab bridges. Enter the characteristics
+        of your bridge project below to download CADD and PDF files you can use to finalize bridge plans. The downloaded standard bridge plans will require 
+        editing by the Engineer of Record.  Edits will include project specific information (including but not limited to construction ID, alignment stationing, 
+        some quantities, and substructure elevations), as well as any additional requirements of the bridge project that aren’t a part of the tool’s 
+        characteristic inputs (pile points, preboring of piles, wildlife travel corridor inclusion, etc.).
+        <br />
+        <br />
+        Questions? <a href="~/Home/About/#contacts">Contact us!</a>
+    </p>
+</div>
+<div>
+    <br />
+</div>
+<div>
+    <form name="planSearch" id="planSearch" method="post">
+        <!--action="Url.Action("GetPlan", "Home")"-->
+        <style>
+            .column {
+                float: left;
+            }
+
+            .left {
+                width: 45%;
+                padding: 0 8px;
+            }
+
+            .right {
+                width: 55%;
+            }
+        </style>
+        <div class="row" style="text-align : right">
+            <div class="column left">
+                <p>
+                    @Html.Label("Project Type: ")
+                </p>
+            </div>
+            <div class="column right" style="text-align : left">
+                <input type="radio" name="projectType" id="projectTypeStateLet" />
+                <label for="projectTypeStateLet">State Let</label>
+                &nbsp;&nbsp;
+                <input type="radio" name="projectType" id="projectTypeLocalLet" runat="server" />
+                <label for="projectTypeLocalLet">Local Let</label> (Not available at this time)
+            </div>
+        </div>
+
+        <div id="localLetRequirements">
+            <style>
+                .column {
+                    float: left;
+                }
+
+                .left {
+                    width: 45%;
+                    padding: 0 8px;
+                }
+
+                .right {
+                    width: 55%;
+                }
+            </style>
+            <div class="row" style="text-align : right">
+                <div class="column left">
+                    <p>
+                        @Html.Label("Agree to Terms of Use: ")
+                    </p>
+                </div>
+                <div class="column right" style="text-align : left">
+                    <input type="checkbox" name="localLetAgreeToTermsOfUse" id="localLetAgreeToTermsOfUse" />
+                </div>
+            </div>
+
+            <div>
+                <p>
+                    By checking "Terms of Use" above, I certify that my use of the WisDOT Standard Bridge Design Tool
+                    will be consistent and in accordance with the <a href="#" id="localLetAgreement">WisDOT Standard Bridge Design Tool Use Agreement</a> between me, or my
+                    employing firm, and the Wisconsin Department of Transportation.
+                </p>
+            </div>
+        </div>
+        <div id="stateLetRequirements">
+            <style>
+                .column {
+                    float: left;
+                }
+
+                .left {
+                    width: 45%;
+                    padding: 0 8px;
+                }
+
+                .right {
+                    width: 55%;
+                }
+            </style>
+            <div class="row" style="text-align : right">
+                <div class="column left">
+                    <p>
+                        @Html.Label("Agree to Terms of Use: ")
+                    </p>
+                </div>
+                <div class="column right" style="text-align : left">
+                    <input type="checkbox" name="stateLetAgreeToTermsOfUse" id="stateLetAgreeToTermsOfUse" />
+                </div>
+            </div>
+
+            <div>
+                <p>
+                    By checking "Terms of Use" above, I certify that my use of the WisDOT Standard Bridge Design Tool
+                    will be consistent and in accordance with the <a href="#" id="stateLetAgreement">WisDOT Standard Bridge Design Tool Use Agreement</a> between me, or my
+                    employing firm, and the Wisconsin Department of Transportation.
+                </p>
+            </div>
+
+            <style>
+                .column {
+                    float: left;
+                }
+
+                .left {
+                    width: 45%;
+                    padding: 0 8px;
+                }
+
+                .right {
+                    width: 55%;
+                }
+            </style>
+            <div class="row" style="text-align : right">
+                <div class="column left">
+                    <p>
+                        @Html.Label("FIIPS Construction ID (8-digit): ")
+                    </p>
+                    <div id="ImageDiv1">
+                        <img id="acceptImage" src="~/Content/Images/accept.png" />
+                    </div>
+                    <div id="ImageDiv2">
+                        <img id="rejectImage" src="~/Content/Images/cross.png" />
+                    </div>
+                </div>
+                <div class="column right" style="text-align : left">
+                    <p>
+                        <input type="text" name="fiipsConstructionId" id="fiipsConstructionId" size="10" maxlength="10" />
+                        <!--<input type="button" name="validateFiipsConstructionId" id="validateFiipsConstructionId" value="Validate" />-->
+                        <input type="button" name="clearFiipsConstructionId" id="clearFiipsConstructionId" value="Clear" />
+                        &emsp;(Format: 12345678, 1234-56-78)
+                        <div id="acceptImageDiv">
+                            Valid Construction ID
+                        </div>
+                        <div id="rejectImageDiv">
+                            Invalid Construction ID
+                        </div>
+                    </p>
+                </div>
+            </div>
+            <div class="row" style="text-align : right">
+                <div class="column left">
+                    <p>
+                        @Html.Label("FIIPS Design ID (Optional): ")
+                    </p>
+                </div>
+                <div class="column right" style="text-align : left">
+                    <p>
+                        <input type="text" name="fiipsDesignId" id="fiipsDesignId" size="10" maxlength="10" />
+                        <!--<input type="button" name="validateFiipsConstructionId" id="validateFiipsConstructionId" value="Validate" />-->
+                        <input type="button" name="clearFiipsDesignId" id="clearFiipsDesignId" value="Clear" />
+                        &emsp;(Format: 12345678, 1234-56-78)
+                    </p>
+                </div>
+            </div>
+            <div class="row" style="text-align : right">
+                <div class="column left">
+                    <p>
+                        @Html.Label("FIIPS Structure ID (Optional): ")
+                    </p>
+                    <div id="ImageDivSA">
+                        <img id="acceptImage" src="~/Content/Images/accept.png" />
+                    </div>
+                    <div id="ImageDivSR">
+                        <img id="rejectImage" src="~/Content/Images/cross.png" />
+                    </div>
+                </div>
+                <div class="column right" style="text-align : left">
+                    <p>
+                        <input type="text" name="fiipsStructureId" id="fiipsStructureId" size="10" maxlength="10" />
+                        <!--<input type="button" name="validateFiipsConstructionId" id="validateFiipsConstructionId" value="Validate" />-->
+                        <input type="button" name="clearFiipsStructureId" id="clearFiipsStructureId" value="Clear" />
+                        &emsp;(Format: B123456, B-12-3456)
+                        <div id="acceptImageDivS">
+                            Valid Structure ID
+                        </div>
+                        <div id="rejectImageDivS">
+                            Invalid Structure ID
+                        </div>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <br />
+        </div>
+
+        <style>
+            .column {
+                float: left;
+            }
+
+            .left {
+                width: 45%;
+                padding: 0 8px;
+            }
+
+            .right {
+                width: 55%;
+            }
+        </style>
+        <div class="row" style="text-align : right">
+            <div class="column left">
+                <div>
+                    <p>
+                        @Html.Label("Span Length (ft): ")
+
+                    </p>
+                </div>
+            </div>
+            <div class="column right" style="text-align : left">
+                <div>
+                    <p>
+                        <select name="spanLength" id="spanLength">
+                            @foreach (var spanLength in ViewBag.SpanLengths)
+                            {
+                                <option value="@spanLength">@spanLength</option>
+                            }
+                        </select>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="text-align : right">
+            <div class="column left">
+                <div>
+                    <p>
+                        @Html.Label("Substructure Skew (deg): ")
+                    </p>
+                </div>
+            </div>
+            <div class="column right" style="text-align : left">
+                <div>
+                    <p>
+                        <select name="substructureSkew" id="substructureSkew">
+                            @foreach (var substructureSkew in ViewBag.SubstructureSkews)
+                            {
+                                <option value="@substructureSkew">@substructureSkew</option>
+                            }
+                        </select>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="text-align : right">
+            <div class="column left">
+                <div>
+                    <p>
+                        @Html.Label("Clear Roadway Width (ft): ")
+                    </p>
+                </div>
+            </div>
+            <div class="column right" style="text-align : left">
+                <div>
+                    <p>
+                        <select name="clearRoadwayWidth" id="clearRoadwayWidth">
+                            @foreach (var clearRoadwayWidth in ViewBag.ClearRoadwayWidths)
+                            {
+                                <option value="@clearRoadwayWidth">@clearRoadwayWidth</option>
+                            }
+                        </select>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="text-align : right">
+            <div class="column left">
+                <div>
+                    <p>
+                        @Html.Label("Barrier Type: ")
+                    </p>
+                </div>
+            </div>
+            <div class="column right" style="text-align : left">
+                <div>
+                    <p>
+                        <select name="barrierType" id="barrierType">
+                            @foreach (var barrierType in ViewBag.BarrierTypes)
+                            {
+                                <option value="@barrierType.BarrierTypeCode">@barrierType.BarrierTypeDescription</option>
+                            }
+                        </select>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="text-align : right">
+            <div class="column left">
+                <div>
+                    <p>
+                        @Html.Label("Paving Notch: ")
+                    </p>
+                </div>
+            </div>
+            <div class="column right" style="text-align : left">
+                <div>
+                    <p>
+                        <input type="checkbox" name="pavingNotch" id="pavingNotch" />
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="text-align : right">
+            <div class="column left">
+                <div>
+                    <p>
+                        @Html.Label("Minimum Abutment Height (ft): ")
+                    </p>
+                </div>
+            </div>
+            <div class="column right" style="text-align : left">
+                <div>
+                    <p>
+                        <select name="abutmentHeight" id="abutmentHeight">
+                            @foreach (var abutmentHeight in ViewBag.AbutmentHeights)
+                            {
+                                <option value="@abutmentHeight">@abutmentHeight</option>
+                            }
+                        </select>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="text-align : right">
+            <div class="column left">
+                <div>
+                    <p>
+                        @Html.Label("Piling Type: ")
+                    </p>
+                </div>
+            </div>
+            <div class="column right" style="text-align : left">
+                <div>
+                    <p>
+                        <select name="pilingType" id="pilingType">
+                            @foreach (var pilingType in ViewBag.PilingTypes)
+                            {
+                                <option value="@pilingType.PilingTypeCode">@pilingType.PilingTypeDescription</option>
+                            }
+                        </select>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <br />
+        </div>
+        <div>
+            <p>
+                <input type="button" name="getPlan" id="getPlan" value="Get Plan" />
+                <div id="ajaxLoaderDiv">
+                    <br />
+                    <img id="ajaxLoader" src="~/Content/Images/ajax-loader.gif" />
+                </div>
+                @*Ajax.ActionLink("Download", "GetPlan",
+                new AjaxOptions
+                {
+                    UpdateTargetId = "downloads",
+                    InsertionMode = InsertionMode.Replace,
+                    HttpMethod = "POST"
+                })*@
+            </p>
+        </div>
+        <div id="downloads"></div>
+    </form>
+    <hr />
+</div>
+@section scripts {
+    <script src="~/Scripts/search.js"></script>
+}
+
+
+

@@ -1,0 +1,114 @@
+﻿@model WisDot.Bos.StandardPlans.Models.StandardPlan
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>StandardPlan</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PlanId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlanId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PlanFileName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlanFileName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SpanLength)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SpanLength)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SubstructureSkew)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SubstructureSkew)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ClearRoadwayWidth)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClearRoadwayWidth)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BarrierTypeCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BarrierTypeCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BarrierTypeDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BarrierTypeDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PavingNotch)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PavingNotch)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AbutmentHeight)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AbutmentHeight)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PilingTypeCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PilingTypeCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PilingTypeDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PilingTypeDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InactiveDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InactiveDate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
