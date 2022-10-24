@@ -34,7 +34,7 @@ JavaScript
 *Note: All code available is not intended for reuse but rather only as informative material. Any and all sensitive information contained in the solution including, but not limited to, security keys, authentication details, user information/data, and database or gateway logins necessary for normal function have been removed for the sake of security and privacy. 
 
 Other Resources:
-Standard Plans User Guide 
-Standard Bridge Design Tool Policy Memo
+
+Standard Plans User Guide and Standard Bridge Design Tool Policy Memo pdfs included in solution.
  
 If you have any further questions, please contact me at lukedbreyer@gmail.com or by any method found on the "About Me" page.
