@@ -31,7 +31,7 @@ HTML
 JavaScript
 
 
-*Note: All code available on this website is not intended for reuse but rather only as informative material. All sensitive information contained in the solution including, but not limited to, security keys, authentication details, user information/data, and database or gateway logins necessary for normal function have all been removed for the sake of security and privacy. 
+*Note: All code available is not intended for reuse but rather only as informative material. Any and all sensitive information contained in the solution including, but not limited to, security keys, authentication details, user information/data, and database or gateway logins necessary for normal function have been removed for the sake of security and privacy. 
 
 Other Resources:
 Standard Plans User Guide 
